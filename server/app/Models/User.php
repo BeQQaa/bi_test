@@ -2,12 +2,18 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Exceptions\WrongPasswordException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Response;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @mixin Builder
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -18,9 +24,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'company_id',
+        'phone_number'
     ];
 
     /**
@@ -42,4 +51,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * @param string $password
+     * @param string $storedPassword
+     * @return void
+     * @throws WrongPasswordException
+     */
+    public final static function attempt(string $password, string $storedPassword): void
+    {
+        if(!Hash::check($password, $storedPassword)){
+            throw new WrongPasswordException('Invalid password', Response::HTTP_LOCKED);
+        }
+    }
+
+    public final function company(): Company
+    {
+        return $this->company->belongsTo(Company::class);
+    }
 }
