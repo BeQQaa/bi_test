@@ -1,0 +1,11 @@
+version: "3.5"
+services:
+  vue-desktop:
+    container_name: vue-desktop
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+    ports:
+      - "3000:5174"

@@ -19,9 +19,15 @@
     "@vitejs/plugin-vue": "^4.3.4",
     "@vitejs/plugin-vue-jsx": "^3.0.2",
     "@vue/eslint-config-prettier": "^8.0.0",
+    "create-vite": "^4.4.1",
     "eslint": "^8.49.0",
     "eslint-plugin-vue": "^9.17.0",
     "prettier": "^3.0.3",
     "vite": "^4.4.9"
-  }
+  },
+  "description": "This template should help get you started developing with Vue 3 in Vite.",
+  "main": "vite.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
