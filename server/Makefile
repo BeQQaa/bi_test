@@ -46,4 +46,8 @@ seeder:
 seed:
 	docker exec $(status)local-laravel php artisan db:seed
 
+policy:
+	docker exec $(status)local-laravel php artisan make:policy '$(name)Policy'
+
+
 
