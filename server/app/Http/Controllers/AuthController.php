@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\WrongPasswordException;
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\LogoutRequest;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -21,9 +20,9 @@ class AuthController extends Controller
     {
         $user = User::create($request->validated());
 
-        $token = $user->createToken('web_token')->plainTextToken;
+        $token = User::roleType($request->validated(config('constants.ROLE_NAME')), $user);
 
-        return new JsonResponse(['token' => $token], ResponseAlias::HTTP_CREATED);
+        return new JsonResponse([config('constants.USER_TOKEN_NAME') => $token], ResponseAlias::HTTP_CREATED);
     }
 
     /**
@@ -33,13 +32,13 @@ class AuthController extends Controller
      */
     public final function login(LoginRequest $request): JsonResponse
     {
-        $user = User::where('email', $request->validated())->first();
-        $credentials = $request->validated('password');
+        $user = User::where(config('constants.USER_EMAIL'), $request->validated())->first();
+        $credentials = $request->validated(config('constants.USER_PASSWORD'));
         User::attempt($credentials, $user->password);
 
-        $token = $user->createToken('web_token')->plainTextToken;
+        $token = User::roleType($user->role, $user);
 
-        return new JsonResponse(['token' => $token], ResponseAlias::HTTP_OK);
+        return new JsonResponse([config('responses.types.TOKEN') => $token], ResponseAlias::HTTP_OK);
     }
 
     /**
@@ -50,6 +49,6 @@ class AuthController extends Controller
 
         Auth::user()->currentAccessToken()->delete();
 
-        return new JsonResponse(['message' => 'Logged out'], ResponseAlias::HTTP_OK);
+        return new JsonResponse(config('responses.LOGOUT'), ResponseAlias::HTTP_OK);
     }
 }
