@@ -7,3 +7,46 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+Certainly! Here is the documentation for the provided commands in English:
+
+---
+
+### Command Documentation using the Makefile
+
+#### `run`:
+
+- **Description**: This command is used to start both the server and client services using Docker Compose. It also
+  triggers a migration process on the server.
+- **Usage**:
+  ```bash
+  make run
+  ```
+
+#### `down`:
+
+- **Description**: This command is used to stop and remove the server and client services along with their associated
+  volumes.
+- **Usage**:
+  ```bash
+  make down
+  ```
+  
+#### `run-client`:
+
+- **Description**: This command is used to start only the client service using Docker Compose.
+- **Usage**:
+  ```bash
+  make run-client
+  ```
+
+#### `run-server`:
+
+- **Description**: This command is used to start only the server service using Docker Compose.
+- **Usage**:
+  ```bash
+  make run-server
+ 
+
+These commands are part of a Makefile and are designed to simplify the management of your server and client services
+using Docker Compose. You can run them from your command line to perform the specified actions as described.
+

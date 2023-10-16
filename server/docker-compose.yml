@@ -11,6 +11,8 @@ services:
             - 'local_backend'
         volumes:
             - ./:/var/www/html
+        depends_on:
+        - local-db
 
     local-db:
         image: mariadb:10.6
