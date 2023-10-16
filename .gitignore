@@ -1,4 +1,7 @@
-#Server folder
+################################################################
+#################Server folder###################################
+################################################################
+
 server/.phpunit.cache
 server/node_modules
 server/public/build
@@ -18,9 +21,15 @@ yarn-error.log
 server/.fleet
 server/.idea
 server/.vscode
+server/storage/app/logo/
+server/public/logo/
 .idea
 .vscode
-#Clent folder
+
+################################################################
+#################Client folder###################################
+################################################################
+
 # Logs
 client/logs
 client/*.log
