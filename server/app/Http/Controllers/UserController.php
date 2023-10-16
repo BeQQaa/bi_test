@@ -21,7 +21,7 @@ class UserController extends Controller
         $userModels = User::select(explode(',', config("constants.USER_INDEX_SELECT")))
             ->simplePaginate($limit);
 
-        return new JsonResponse($userModels);
+        return new JsonResponse($userModels, Response::HTTP_OK);
     }
 
     /**
@@ -30,9 +30,9 @@ class UserController extends Controller
      */
     public final function store(UserStoreRequest $request): JsonResponse
     {
-        $user = User::create($request->validated());
+        $userModel = User::create($request->validated());
 
-        return new JsonResponse($user, Response::HTTP_OK);
+        return new JsonResponse($userModel, Response::HTTP_OK);
     }
 
     /**
@@ -64,7 +64,6 @@ class UserController extends Controller
      */
     public final function destroy(UserDestroyRequest $request, string $id): JsonResponse
     {
-//        check permissions
         User::find($id)->delete();
 
         return new JsonResponse(config('constants.DELETED'), Response::HTTP_ACCEPTED);
