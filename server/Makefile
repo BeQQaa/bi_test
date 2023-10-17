@@ -16,6 +16,11 @@ migrate:
 refresh:
 	docker exec $(status)local-laravel php artisan migrate:refresh
 
+link:
+	docker exec $(status)local-laravel php artisan storage:link
+	docker exec $(status)local-laravel php artisan config:clear
+	docker exec $(status)local-laravel php artisan optimize:clear
+
 refreshf:
 	docker exec $(status)local-laravel php artisan migrate:refresh --path='/database/migrations/$(name)'
 
@@ -48,6 +53,12 @@ seed:
 
 policy:
 	docker exec $(status)local-laravel php artisan make:policy '$(name)Policy'
+
+test:
+	docker exec $(status)local-laravel php artisan make:test '$(name)Test'
+
+tmigration:
+	docker exec $(status)local-laravel php artisan migrate --env=testing
 
 
 

@@ -14,7 +14,7 @@ class UserDestroyRequest extends FormRequest
      */
     public final function authorize(): bool
     {
-        return Gate::allows('destroy', [User::class]);
+        return Gate::allows('destroy', [User::class, $this->id]);
     }
 
     /**
@@ -25,7 +25,14 @@ class UserDestroyRequest extends FormRequest
     public final function rules(): array
     {
         return [
-            //
+            'id' => 'required|exists:users,id',
         ];
+    }
+    protected function prepareForValidation()
+    {
+        $id = config('constants.COLUMN_ID');
+        $this->merge([
+            $id => $this->route($id),
+        ]);
     }
 }

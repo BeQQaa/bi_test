@@ -11,9 +11,11 @@ services:
             - 'local_backend'
         volumes:
             - ./:/var/www/html
+        depends_on:
+        - local-db
 
     local-db:
-        image: mariadb:10.6
+        image: mariadb:latest
         container_name: "local-db"
         command:
             --default-authentication-plugin=mysql_native_password

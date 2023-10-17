@@ -3,15 +3,17 @@
 namespace App\Http\Requests;
 
 use App\Models\User;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 
 class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
+    public final function authorize(): bool
     {
         return Gate::allows('update', [User::class, $this->id]);
     }
@@ -19,9 +21,9 @@ class UserUpdateRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public final function rules(): array
     {
         return [
             'first_name' => 'required|string',
@@ -31,5 +33,12 @@ class UserUpdateRequest extends FormRequest
             'phone_number' => 'nullable|string',
             'role' => 'required|string|in:admin,user'
         ];
+    }
+
+    protected final function prepareForValidation()
+    {
+        $this->merge([
+            'password' => Hash::make($this->password)
+        ]);
     }
 }

@@ -1,4 +1,7 @@
-#Server folder
+################################################################
+#################Server folder###################################
+################################################################
+
 server/.phpunit.cache
 server/node_modules
 server/public/build
@@ -18,6 +21,40 @@ yarn-error.log
 server/.fleet
 server/.idea
 server/.vscode
+server/storage/app/logo/
+server/public/logo/
 .idea
 .vscode
-#Clent folder
+
+################################################################
+#################Client folder###################################
+################################################################
+
+# Logs
+client/logs
+client/*.log
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+client/pnpm-debug.log*
+client/lerna-debug.log*
+
+client/node_modules
+client/.DS_Store
+client/dist
+client/dist-ssr
+client/coverage
+client/*.local
+
+client/cypress/videos/
+client/cypress/screenshots/
+
+# Editor directories and files
+client/.vscode/*
+client/!.vscode/extensions.json
+client/.idea
+client/*.suo
+client/*.ntvs*
+client/*.njsproj
+client/*.sln
+client/*.sw?
