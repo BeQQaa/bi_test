@@ -54,5 +54,11 @@ seed:
 policy:
 	docker exec $(status)local-laravel php artisan make:policy '$(name)Policy'
 
+test:
+	docker exec $(status)local-laravel php artisan make:test '$(name)Test'
+
+tmigration:
+	docker exec $(status)local-laravel php artisan migrate --env=testing
+
 
 
