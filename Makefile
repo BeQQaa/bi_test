@@ -4,6 +4,7 @@ run:
 	@echo "Begin migration..."
 	@sleep 5
 	make -f server/Makefile migrate
+	make -f server/Makefile link
 
 down:
 	docker-compose -f ./server/docker-compose.yml down -v

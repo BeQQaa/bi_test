@@ -27,7 +27,7 @@ class RegisterRequest extends FormRequest
             'last_name' => 'required|string',
             'email' => 'required|string|email:rfc,dns|unique:users,email',
             'password' => 'required|string|min:6',
-            'phone_number' => 'nullable|string',
+            'phone_number' => 'sometimes|string',
             'role' => 'required|string|in:admin,user'
         ];
     }

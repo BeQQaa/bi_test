@@ -39,8 +39,6 @@ class Company extends Model
         return $request->has($itemName)
             ? Storage::disk($diskName)->putFile('', $request->file('image'))
             : null;
-
-
     }
 
     public final static function getFullPath(string $logoPath): ?string

@@ -16,6 +16,11 @@ migrate:
 refresh:
 	docker exec $(status)local-laravel php artisan migrate:refresh
 
+link:
+	docker exec $(status)local-laravel php artisan storage:link
+	docker exec $(status)local-laravel php artisan config:clear
+	docker exec $(status)local-laravel php artisan optimize:clear
+
 refreshf:
 	docker exec $(status)local-laravel php artisan migrate:refresh --path='/database/migrations/$(name)'
 

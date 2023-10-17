@@ -25,9 +25,9 @@ class CompanyUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
+            'name' => 'sometimes|string',
             'image' => 'sometimes|file',
-            'image_path' => 'required|string',
+            'image_path' => 'sometimes|string',
             'web_site_url' => 'sometimes|string',
             'email' => 'sometimes|string'
         ];
@@ -35,14 +35,15 @@ class CompanyUpdateRequest extends FormRequest
 
     protected final function prepareForValidation(): void
     {
-        $this->has('image')
+
+        $this->has(config('constants.LOGO_FILE_NAME'))
             ? $logoPath = Company::storeFile
-        (config('constants.STORE_LOGO'), $this, config('constants.LOGO_FILE_NAME'))
-            : $logoPath = '';
+                                (config('constants.STORE_LOGO'), $this, config('constants.LOGO_FILE_NAME'))
+            : $logoPath = null;
 
-        $fullLogoPath = Company::getFullPath($logoPath);
-        $this->merge([config('constants.LOGO_DB_NAME') => $fullLogoPath]);
-
-
+        if (isset($logoPath)){
+            $fullLogoPath = Company::getFullPath($logoPath);
+            $this->merge([config('constants.LOGO_DB_NAME') => $fullLogoPath]);
+        }
     }
 }

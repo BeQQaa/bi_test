@@ -2,6 +2,7 @@
 
 return [
     'USER_INDEX_SELECT' => "first_name,last_name,email,id",
+    "EXPLODE_PATTERN" => ',',
 
     'USER_TOKEN_ADMIN' => "admin_token",
     'USER_TOKEN_USER' => "web_token",
@@ -33,5 +34,5 @@ return [
     'LOGO_DB_NAME' => 'image_path',
 
     'IMAGE_URL_DEV' => 'http://localhost',
-    'IMAGE_PREFIX' => '/logo/'
+    'IMAGE_PREFIX' => '/logo/',
 ];

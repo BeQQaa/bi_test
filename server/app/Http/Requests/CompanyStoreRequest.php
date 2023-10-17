@@ -6,7 +6,6 @@ use App\Models\Company;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-
 class CompanyStoreRequest extends FormRequest
 {
     /**
@@ -25,7 +24,7 @@ class CompanyStoreRequest extends FormRequest
     public final function rules(): array
     {
         return [
-            'name' => 'required|string',
+            'name' => 'required|string|unique:company,name',
             'image' => 'sometimes|image',
             'image_path' => 'sometimes|string',
             'web_site_url' => 'sometimes|string',
@@ -35,12 +34,14 @@ class CompanyStoreRequest extends FormRequest
 
     protected final function prepareForValidation(): void
     {
-        $this->has('image')
+        $this->has(config('constants.LOGO_FILE_NAME'))
             ? $logoPath = Company::storeFile
                 (config('constants.STORE_LOGO'), $this, config('constants.LOGO_FILE_NAME'))
-            : $logoPath = '';
+            : $logoPath = null;
 
-        $fullLogoPath = Company::getFullPath($logoPath);
-        $this->merge([config('constants.LOGO_DB_NAME') => $fullLogoPath]);
+        if (isset($logoPath)){
+            $fullLogoPath = Company::getFullPath($logoPath);
+            $this->merge([config('constants.LOGO_DB_NAME') => $fullLogoPath]);
+        }
     }
 }
