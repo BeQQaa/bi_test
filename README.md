@@ -30,21 +30,6 @@ Certainly! Here is the documentation for the provided commands in English:
   ```bash
   make down
   ```
-  
-#### `run-client`:
-
-- **Description**: This command is used to start only the client service using Docker Compose.
-- **Usage**:
-  ```bash
-  make run-client
-  ```
-
-#### `run-server`:
-
-- **Description**: This command is used to start only the server service using Docker Compose.
-- **Usage**:
-  ```bash
-  make run-server
 
 #### Or run env by ourself
 #### `run-server`:
@@ -55,11 +40,20 @@ docker-compose -f ./server/docker-compose.yml up -d --build
 ```bash
 docker-compose -f ./client/docker-compose.yml up -d --build
 ````
-#### `run-migration without seeds`:
+#### `run-migration local`:
 ```bash
-	make -f server/Makefile migrate
+docker exec local-laravel php artisan migrate
 ```
 #### `run-link storage to the public`:
 ```bash
-	make -f server/Makefile link
+docker exec $(status)local-laravel php artisan storage:link
 ```
+#### `run-create sqlite database`:
+```bash
+touch server/database/testing.sqlite
+```
+#### `run-create sqlite database`:
+```bash
+docker exec $(status)local-laravel php artisan migrate --env=testing
+```
+

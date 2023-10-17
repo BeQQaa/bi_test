@@ -79,9 +79,9 @@ class User extends Authenticatable
             $user->createToken(config('constants.USER_TOKEN_USER'), config('constants.USER_ABILITIES'))->plainTextToken;
     }
 
-    public final function company(): Company
+    public final function company()
     {
-        return $this->company->belongsTo(Company::class);
+        return $this->belongsTo(Company::class);
     }
 
 

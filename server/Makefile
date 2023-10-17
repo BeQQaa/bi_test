@@ -58,6 +58,7 @@ test:
 	docker exec $(status)local-laravel php artisan make:test '$(name)Test'
 
 tmigration:
+	touch ./database/testing.sqlite
 	docker exec $(status)local-laravel php artisan migrate --env=testing
 
 
