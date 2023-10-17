@@ -1,21 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { ref } from 'vue'
+
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
-
-import AboutView from '../views/AboutView.vue'
+import CompaniesView from '../views/CompaniesView.vue'
 import AppLayout from '../components/AppLayout.vue'
 
+
 const isAuthenticated = () => {
+    // const token = "xfgdgfdfnj/gd//jfdosidjgidfhoisdjfakdfkghksjfohj";
   const token = localStorage.getItem('token');
   return token;
 };
 
-const isAuth = isAuthenticated()
+const isAuth = ref(isAuthenticated());
 
-console.log("isAuth", isAuth)
 
-const routes = isAuth
+console.log("isAuth", isAuth.value)
+
+const routes = isAuth.value
   ? [
       {
         path: '/',
@@ -27,9 +31,9 @@ const routes = isAuth
             component: HomeView
           },
           {
-            path: '/about',
-            name: 'about',
-            component: AboutView
+            path: '/companies',
+            name: 'companies',
+            component: CompaniesView
           }
         ]
       }
