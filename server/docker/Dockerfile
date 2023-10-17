@@ -5,7 +5,7 @@ ENV php='php8.2'
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y --no-install-recommends curl wget gnupg2 ca-certificates lsb-release apt-transport-https debian-archive-keyring
+RUN apt-get install -y --no-install-recommends curl wget gnupg2 ca-certificates lsb-release apt-transport-https debian-archive-keyring php-sqlite3
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg &&\
     sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 
@@ -21,6 +21,8 @@ RUN echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
         | tee /etc/apt/sources.list.d/nginx.list
 
 RUN apt-get update && apt-get install nginx
+RUN apt-get update && apt-get install -y php-sqlite3
+
 
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
