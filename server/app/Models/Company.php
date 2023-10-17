@@ -45,4 +45,9 @@ class Company extends Model
     {
         return config('constants.IMAGE_URL_DEV').config('constants.IMAGE_PREFIX').$logoPath;
     }
+
+    public final function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
