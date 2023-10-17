@@ -18,8 +18,6 @@ class RegistrationTest extends TestCase
     {
         $faker = Faker::create();
 
-
-
         $response = $this->putJson('api/auth/', [
             'first_name' => $faker->firstName,
             'last_name' => $faker->lastName,
