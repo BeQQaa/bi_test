@@ -12,7 +12,7 @@ import AppLayout from './components/AppLayout.vue';
 
 <style scoped>
 .container {
-  
+  width: 1920px;
 }
 
 @media (min-width: 1024px) {

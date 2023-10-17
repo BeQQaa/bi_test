@@ -18,5 +18,6 @@ export default {
     background: #5B466C;
     color: #FFF;
     font-size: 20px;
+    cursor: pointer;
 }
 </style>
