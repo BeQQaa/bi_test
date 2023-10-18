@@ -63,3 +63,10 @@ docker-compose -f ./client/docker-compose.yml up -d --build
 ```bash
 	make -f server/Makefile link
 ```
+
+<h1 style="color: #ef4444">If you want run unit tests</h1>
+
+#### `In bi_test/server folder`:
+```
+	make tmigration
+```
