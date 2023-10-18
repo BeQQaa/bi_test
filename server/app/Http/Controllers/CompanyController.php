@@ -17,8 +17,7 @@ class CompanyController extends Controller
      */
     public final function index(int $limit = 5): JsonResponse
     {
-        $companyModel = Company::select(explode(',', config("constants.USER_INDEX_SELECT")))
-            ->simplePaginate($limit);
+        $companyModel = Company::simplePaginate($limit);
 
         return new JsonResponse($companyModel, Response::HTTP_OK);
     }
